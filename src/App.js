@@ -171,6 +171,10 @@ class App extends Component {
    */
   undo = () => {
     this.tps.undoTransaction();
+  }  
+  
+  redo = () => {
+    this.tps.doTransaction();
   }
 
   /**
@@ -346,7 +350,7 @@ class App extends Component {
           changeLogoCallback={this.buildChangeLogoTransaction}  // TRANSACTION CALLBACK
           undoCallback={this.undo}                        // TRANSACTION CALLBACK                       
           canUndo={this.canUndo}                          // TRANSACTION CALLBACK
-
+          redoCallback={this.redo}
         />;
       default:
         return <div></div>;
