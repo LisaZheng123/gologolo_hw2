@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {Modal, Button} from 'react-materialize'
+import TextInput from 'react-materialize/lib/TextInput';
 
 class TextEditSidebar extends Component {
     constructor() {
@@ -9,7 +10,8 @@ class TextEditSidebar extends Component {
         // VALUES HERE
         this.state = {
             textColor : "#FF0000",
-            fontSize : 24
+            fontSize : 24,
+            inputFieldText : ""
         }
     }
 
@@ -30,16 +32,16 @@ class TextEditSidebar extends Component {
     completeUserEditing = () => {
         console.log("completeUserEditing");
         console.log("this.state.textColor: " + this.state.textColor);
-        this.props.changeLogoCallback(this.props.logo, this.props.logo.key, this.props.logo.text, this.state.textColor, this.state.fontSize);
-    }
-
-    handleTextEdit = () => {
-        console.log("handleTextEdit");
-        
+        this.props.changeLogoCallback(this.props.logo, this.props.logo.key, this.state.inputFieldText, this.state.textColor, this.state.fontSize);
     }
 
     handleRedo = () => {
         this.props.redoCallback();
+    }
+
+    handleInputFieldText = (event) => {
+        console.log("handleInputFieldText to " + event.target.value);
+        this.setState({ inputFieldText: event.target.value }, this.completeUserEditing);
     }
 
     render() {
@@ -51,30 +53,30 @@ class TextEditSidebar extends Component {
             <div className="card-panel col s4">
                 <div className="card blue-grey darken-1">
                     <div className="card-content white-text">
-                    <Modal
-  actions={[
-    <Button flat modal="close" node="button" waves="green">Save</Button>
-  ]}
-  bottomSheet={false}
-  fixedFooter={false}
-  header="Modal Header"
-  id="modal-0"
-  options={{
-    dismissible: true,
-    endingTop: '10%',
-    inDuration: 250,
-    onCloseEnd: null,
-    onCloseStart: null,
-    onOpenEnd: null,
-    onOpenStart: null,
-    opacity: 0.5,
-    outDuration: 250,
-    preventScrolling: true,
-    startingTop: '4%'
-  }}
-  trigger={<Button node="button">&#9998;</Button>}
->
-</Modal>
+                    <Modal actions={[
+                            <Button flat modal="close" node="button" waves="green">Save</Button>
+                        ]}
+                        bottomSheet={false}
+                        fixedFooter={false}
+                        header="Modal Header"
+                        id="modal-0"
+                        options={{
+                            dismissible: true,
+                            endingTop: '10%',
+                            inDuration: 250,
+                            onCloseEnd: null,
+                            onCloseStart: null,
+                            onOpenEnd: null,
+                            onOpenStart: null,
+                            opacity: 0.5,
+                            outDuration: 250,
+                            preventScrolling: true,
+                            startingTop: '4%'
+                        }}
+                        trigger={<Button node="button">&#9998;</Button>}
+                    >
+                        <TextInput onChange={this.handleInputFieldText}/>
+                        </Modal>
                         <button className={undoClass} onClick={this.handleUndo}>Undo</button>
                         <button className={undoClass} onClick={this.handleRedo}>Redo</button>
                     </div>
