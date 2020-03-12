@@ -149,7 +149,9 @@ class App extends Component {
   buildChangeLogoTransaction = (
     oldLogo, logoKey, newText, 
     newTextColor, newFontSize, newBackgroundColor, 
-    newBorderColor, newPadding, newMargin) => {
+    newBorderColor, newPadding, newMargin,
+    newBorderRadius, newBorderThickness
+    ) => {
     // THIS WILL BE THE LOGO AFTER THE CHANGE HAPPENS, NOTE WE BUILD
     // AN ENTIRELY NEW LOGO EACH TIME BUT IT SHOULD KEEP THE SAME KEY
     let postEditLogo = {
@@ -160,7 +162,9 @@ class App extends Component {
       backgroundColor: newBackgroundColor,
       borderColor: newBorderColor,
       padding: newPadding, 
-      margin: newMargin
+      margin: newMargin,
+      borderRadius: newBorderRadius,
+      borderThickness: newBorderThickness
     };
 
     // NOW BUILD THE TRANSACTION OBJECT

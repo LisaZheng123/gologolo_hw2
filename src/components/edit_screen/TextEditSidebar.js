@@ -16,7 +16,9 @@ class TextEditSidebar extends Component {
             backgroundColor: this.props.logo.backgroundColor,
             borderColor: this.props.logo.borderColor,
             padding: this.props.logo.padding,
-            margin: this.props.logo.margin        
+            margin: this.props.logo.margin,
+            borderRadius: this.props.borderRadius,
+            borderThickness: this.props.borderThickness        
         }
     }
 
@@ -54,13 +56,25 @@ class TextEditSidebar extends Component {
         this.setState({ margin: event.target.value }, this.completeUserEditing);       
     }
 
+    handleBorderRadiusChange = (event) => {
+        console.log("handleBorderRadiusChange to " + event.target.value);
+        this.setState({ borderRadius: event.target.value }, this.completeUserEditing);       
+    }
+
+    handleBorderThicknessChange = (event) => {
+        console.log("handleBorderThicknessChange to " + event.target.value);
+        this.setState({ borderThickness: event.target.value }, this.completeUserEditing);       
+    }
+
     completeUserEditing = () => {
         console.log("completeUserEditing");
         console.log("this.state.textColor: " + this.state.textColor);
         this.props.changeLogoCallback(
             this.props.logo, this.props.logo.key, this.state.text, 
             this.state.textColor, this.state.fontSize, this.state.backgroundColor, 
-            this.state.borderColor, this.state.padding, this.state.margin);
+            this.state.borderColor, this.state.padding, this.state.margin,
+            this.state.borderRadius, this.state.borderThickness
+            );
     }
 
     handleRedo = () => {
@@ -153,6 +167,24 @@ class TextEditSidebar extends Component {
                                 <Range min="4" max="144" 
                                     onChange={this.handleFontSizeChange}
                                     value={this.props.logo.fontSize} />
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            <div className="col s4">Border Radius:</div>
+                            <div className="col s8">
+                                <Range min="4" max="144" 
+                                    onChange={this.handleBorderRadiusChange}
+                                    value={this.props.logo.borderRadius} />
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            <div className="col s4">Border Thickness:</div>
+                            <div className="col s8">
+                                <Range min="4" max="144" 
+                                    onChange={this.handleBorderThicknessChange}
+                                    value={this.props.logo.borderThickness} />
                             </div>
                         </div>
 
