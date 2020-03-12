@@ -11,7 +11,8 @@ class TextEditSidebar extends Component {
         this.state = {
             textColor : "#FF0000",
             fontSize : 24,
-            inputFieldText : ""
+            inputFieldText : "",
+            backgroundColor: ""
         }
     }
 
@@ -24,6 +25,11 @@ class TextEditSidebar extends Component {
         this.setState({ textColor: event.target.value }, this.completeUserEditing);
     }
 
+    handleBackgroundColorChange = (event) => {
+        console.log("handleBackgroundColorChange to " + event.target.value);
+        this.setState({ backgroundColor: event.target.value }, this.completeUserEditing);
+    }
+
     handleFontSizeChange = (event) => {
         console.log("handleTextColorChangeComplete to " + event.target.value);
         this.setState({ fontSize: event.target.value }, this.completeUserEditing);
@@ -32,16 +38,21 @@ class TextEditSidebar extends Component {
     completeUserEditing = () => {
         console.log("completeUserEditing");
         console.log("this.state.textColor: " + this.state.textColor);
-        this.props.changeLogoCallback(this.props.logo, this.props.logo.key, this.state.inputFieldText, this.state.textColor, this.state.fontSize);
+        this.props.changeLogoCallback(this.props.logo, this.props.logo.key, this.state.inputFieldText, this.state.textColor, this.state.fontSize, this.state.backgroundColor);
     }
 
     handleRedo = () => {
         this.props.redoCallback();
     }
 
-    handleInputFieldText = (event) => {
-        console.log("handleInputFieldText to " + event.target.value);
-        this.setState({ inputFieldText: event.target.value }, this.completeUserEditing);
+    handleInputFieldText = () => {
+        var input = this.state.inputFieldText;
+        console.log("handleInputFieldText to " + this.state.inputFieldText);
+        if (input.trim() == "") {
+            alert("Invalid!");
+        } else {
+            this.completeUserEditing();
+        }
     }
 
     render() {
@@ -54,7 +65,7 @@ class TextEditSidebar extends Component {
                 <div className="card blue-grey darken-1">
                     <div className="card-content white-text">
                     <Modal actions={[
-                            <Button flat modal="close" node="button" waves="green">Save</Button>
+                            <Button flat modal="close" node="button" waves="green" onClick={this.handleInputFieldText}>Save</Button>
                         ]}
                         bottomSheet={false}
                         fixedFooter={false}
@@ -75,7 +86,7 @@ class TextEditSidebar extends Component {
                         }}
                         trigger={<Button node="button">&#9998;</Button>}
                     >
-                        <TextInput onChange={this.handleInputFieldText}/>
+                        <TextInput onChange={(event)=>this.setState({ inputFieldText: event.target.value })}/>
                         </Modal>
                         <button className={undoClass} onClick={this.handleUndo}>Undo</button>
                         <button className={undoClass} onClick={this.handleRedo}>Redo</button>
@@ -93,6 +104,17 @@ class TextEditSidebar extends Component {
                                 />
                             </div>
                         </div>
+
+                        <div className="row">
+                            <div className="col s4">Background Color:</div>
+                            <div className="col s8">
+                                <input type="color"
+                                        onChange={this.handleBackgroundColorChange}
+                                        value={this.props.logo.backgroundColor}
+                                />
+                            </div>
+                        </div>
+
                         <div className="row">
                             <div className="col s4">Font Size:</div>
                             <div className="col s8">
@@ -103,15 +125,6 @@ class TextEditSidebar extends Component {
                         </div>
                     </div>
                 </div>
-                     <div id="modal1" class="modal">
-                       <div class="modal-content">
-                            <h4>Modal Header</h4>
-                             <p>A bunch of text</p>
-                        </div>
-                      <div class="modal-footer">
-                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-                      </div>
-                 </div>
             </div>
         )
     }
