@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Modal, Button} from 'react-materialize'
+import {Modal, Button, Range} from 'react-materialize'
 import TextInput from 'react-materialize/lib/TextInput';
 
 class TextEditSidebar extends Component {
@@ -135,7 +135,7 @@ class TextEditSidebar extends Component {
                         <div className="row">
                             <div className="col s4">Font Size:</div>
                             <div className="col s8">
-                                <input type="range" min="4" max="144" 
+                                <Range min="4" max="144" 
                                     onChange={this.handleFontSizeChange}
                                     value={this.props.logo.fontSize} />
                             </div>

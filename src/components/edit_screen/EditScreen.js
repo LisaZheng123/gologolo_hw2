@@ -18,6 +18,18 @@ export class EditScreen extends Component {
 
     componentDidMount = () => {
         console.log("\tEditScreen component did mount");
+        document.addEventListener("keydown", this.checkKeyDown);
+    }
+
+    checkKeyDown = (event) => {
+        
+        if (event.key === 'z' && event.ctrlKey){
+            console.log("Ctrl-Z Pressed");
+            this.props.undoCallback();
+        } else if (event.key === 'y' && event.ctrlKey) {
+            console.log("Ctrl-Y Pressed");
+            this.props.redoCallback();
+        }
     }
 
     componentWillUnmount = () => {

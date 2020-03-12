@@ -23,7 +23,8 @@ export const TransactionType = {
 export const LogoDefaults = {
   TEXT : "goLogoLo Logo",
   TEXT_COLOR : "#FF0000",
-  FONT_SIZE : 24
+  FONT_SIZE : 24,
+  BORDER_COLOR : "transparent"
 }
 
 // App IS THE ROOT REACT COMPONENT
@@ -227,7 +228,8 @@ class App extends Component {
       key: this.getHighKey(this.state.logos),
       text: LogoDefaults.TEXT,
       textColor: LogoDefaults.TEXT_COLOR,
-      fontSize: LogoDefaults.FONT_SIZE
+      fontSize: LogoDefaults.FONT_SIZE,
+      borderColor: LogoDefaults.BORDER_COLOR
     }
     return newLogo;
   }
@@ -314,7 +316,6 @@ class App extends Component {
     text += "\ttextColor: " + logoToDisplay.textColor + "\n";
     text += "\tfontSize: " + logoToDisplay.fontSize + "\n";
     text += "\tbackgroundColor: " + logoToDisplay.backgroundColor + "\n";
-    text += "\tborderStyle: solid \n";
     text += "}";
     return text;
   }
