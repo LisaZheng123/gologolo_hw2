@@ -14,7 +14,9 @@ class TextEditSidebar extends Component {
             inputFieldText : "",
             text: this.props.logo.text,
             backgroundColor: this.props.logo.backgroundColor,
-            borderColor: this.props.logo.borderColor
+            borderColor: this.props.logo.borderColor,
+            padding: this.props.logo.padding,
+            margin: this.props.logo.margin        
         }
     }
 
@@ -42,10 +44,23 @@ class TextEditSidebar extends Component {
         this.setState({ fontSize: event.target.value }, this.completeUserEditing);
     }
 
+    handlePaddingSizeChange = (event) => {
+        console.log("handlePaddingSizeChange to " + event.target.value);
+        this.setState({ padding: event.target.value }, this.completeUserEditing);       
+    }
+    
+    handleMarginSizeChange = (event) => {
+        console.log("handleMarginSizeChange to " + event.target.value);
+        this.setState({ margin: event.target.value }, this.completeUserEditing);       
+    }
+
     completeUserEditing = () => {
         console.log("completeUserEditing");
         console.log("this.state.textColor: " + this.state.textColor);
-        this.props.changeLogoCallback(this.props.logo, this.props.logo.key, this.state.text, this.state.textColor, this.state.fontSize, this.state.backgroundColor, this.state.borderColor);
+        this.props.changeLogoCallback(
+            this.props.logo, this.props.logo.key, this.state.text, 
+            this.state.textColor, this.state.fontSize, this.state.backgroundColor, 
+            this.state.borderColor, this.state.padding, this.state.margin);
     }
 
     handleRedo = () => {
@@ -140,6 +155,25 @@ class TextEditSidebar extends Component {
                                     value={this.props.logo.fontSize} />
                             </div>
                         </div>
+
+                        <div className="row">
+                            <div className="col s4">Padding:</div>
+                            <div className="col s8">
+                                <Range min="4" max="144" 
+                                    onChange={this.handlePaddingSizeChange}
+                                    value={this.props.logo.padding} />
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            <div className="col s4">Margin:</div>
+                            <div className="col s8">
+                                <Range min="4" max="144" 
+                                    onChange={this.handleMarginSizeChange}
+                                    value={this.props.logo.margin} />
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
