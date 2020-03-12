@@ -9,11 +9,12 @@ class TextEditSidebar extends Component {
         // WE'LL MANAGE THE UI CONTROL
         // VALUES HERE
         this.state = {
-            textColor : "#FF0000",
-            fontSize : 24,
+            textColor : this.props.logo.textColor,
+            fontSize : this.props.logo.fontSize,
             inputFieldText : "",
             text: this.props.logo.text,
-            backgroundColor: ""
+            backgroundColor: this.props.logo.backgroundColor,
+            borderColor: this.props.logo.borderColor
         }
     }
 
@@ -31,6 +32,11 @@ class TextEditSidebar extends Component {
         this.setState({ backgroundColor: event.target.value }, this.completeUserEditing);
     }
 
+    handleBorderColorChange = (event) => {
+        console.log("handleBorderColorChange to " + event.target.value);
+        this.setState({ borderColor: event.target.value }, this.completeUserEditing);
+    }
+
     handleFontSizeChange = (event) => {
         console.log("handleTextColorChangeComplete to " + event.target.value);
         this.setState({ fontSize: event.target.value }, this.completeUserEditing);
@@ -39,7 +45,7 @@ class TextEditSidebar extends Component {
     completeUserEditing = () => {
         console.log("completeUserEditing");
         console.log("this.state.textColor: " + this.state.textColor);
-        this.props.changeLogoCallback(this.props.logo, this.props.logo.key, this.state.text, this.state.textColor, this.state.fontSize, this.state.backgroundColor);
+        this.props.changeLogoCallback(this.props.logo, this.props.logo.key, this.state.text, this.state.textColor, this.state.fontSize, this.state.backgroundColor, this.state.borderColor);
     }
 
     handleRedo = () => {
@@ -112,6 +118,16 @@ class TextEditSidebar extends Component {
                                 <input type="color"
                                         onChange={this.handleBackgroundColorChange}
                                         value={this.props.logo.backgroundColor}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            <div className="col s4">Border Color:</div>
+                            <div className="col s8">
+                                <input type="color"
+                                        onChange={this.handleBorderColorChange}
+                                        value={this.props.logo.borderColor}
                                 />
                             </div>
                         </div>
