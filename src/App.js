@@ -312,9 +312,8 @@ class App extends Component {
     text += "\ttext: " + logoToDisplay.text + "\n";
     text += "\ttextColor: " + logoToDisplay.textColor + "\n";
     text += "\tfontSize: " + logoToDisplay.fontSize + "\n";
-    text += "\tbackground-color: " + logoToDisplay.backgroundColor + "\n";
+    text += "\tbackgroundColor: " + logoToDisplay.backgroundColor + "\n";
     text += "}";
-    alert(text);
     return text;
   }
 

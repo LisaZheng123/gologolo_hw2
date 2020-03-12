@@ -3,8 +3,8 @@ import {Modal, Button} from 'react-materialize'
 import TextInput from 'react-materialize/lib/TextInput';
 
 class TextEditSidebar extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         // WE'LL MANAGE THE UI CONTROL
         // VALUES HERE
@@ -12,6 +12,7 @@ class TextEditSidebar extends Component {
             textColor : "#FF0000",
             fontSize : 24,
             inputFieldText : "",
+            text: this.props.logo.text,
             backgroundColor: ""
         }
     }
@@ -38,7 +39,7 @@ class TextEditSidebar extends Component {
     completeUserEditing = () => {
         console.log("completeUserEditing");
         console.log("this.state.textColor: " + this.state.textColor);
-        this.props.changeLogoCallback(this.props.logo, this.props.logo.key, this.state.inputFieldText, this.state.textColor, this.state.fontSize, this.state.backgroundColor);
+        this.props.changeLogoCallback(this.props.logo, this.props.logo.key, this.state.text, this.state.textColor, this.state.fontSize, this.state.backgroundColor);
     }
 
     handleRedo = () => {
@@ -51,7 +52,7 @@ class TextEditSidebar extends Component {
         if (input.trim() == "") {
             alert("Invalid!");
         } else {
-            this.completeUserEditing();
+            this.setState({ text: input}, this.completeUserEditing)
         }
     }
 
