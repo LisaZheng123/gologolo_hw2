@@ -15,6 +15,7 @@ class TextEditWorkspace extends Component {
                 width: "max-content",
                 borderRadius: this.props.logo.borderRadius + "px",
                 borderWidth: this.props.logo.borderThickness + "px"
+            
             }
         }
         return (

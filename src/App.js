@@ -367,6 +367,7 @@ class App extends Component {
           undoCallback={this.undo}                        // TRANSACTION CALLBACK                       
           canUndo={this.canUndo}                          // TRANSACTION CALLBACK
           redoCallback={this.redo}
+          deleteLogo={this.deleteLogo}
         />;
       default:
         return <div></div>;
