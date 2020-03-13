@@ -168,7 +168,7 @@ class TextEditSidebar extends Component {
                         <div className="row">
                             <div className="col s4">Font Size:</div>
                             <div className="col s8">
-                                <Range min="4" max="144" 
+                                <Range min="1" max="30" 
                                     onChange={this.handleFontSizeChange}
                                     value={this.props.logo.fontSize} />
                             </div>
@@ -177,7 +177,7 @@ class TextEditSidebar extends Component {
                         <div className="row">
                             <div className="col s4">Border Radius:</div>
                             <div className="col s8">
-                                <Range min="4" max="144" 
+                                <Range min="1" max="100" 
                                     onChange={this.handleBorderRadiusChange}
                                     value={this.props.logo.borderRadius} />
                             </div>
@@ -186,7 +186,7 @@ class TextEditSidebar extends Component {
                         <div className="row">
                             <div className="col s4">Border Thickness:</div>
                             <div className="col s8">
-                                <Range min="4" max="144" 
+                                <Range min="1" max="30" 
                                     onChange={this.handleBorderThicknessChange}
                                     value={this.props.logo.borderThickness} />
                             </div>
@@ -195,7 +195,7 @@ class TextEditSidebar extends Component {
                         <div className="row">
                             <div className="col s4">Padding:</div>
                             <div className="col s8">
-                                <Range min="4" max="144" 
+                                <Range min="1" max="50" 
                                     onChange={this.handlePaddingSizeChange}
                                     value={this.props.logo.padding} />
                             </div>
@@ -204,7 +204,7 @@ class TextEditSidebar extends Component {
                         <div className="row">
                             <div className="col s4">Margin:</div>
                             <div className="col s8">
-                                <Range min="4" max="144" 
+                                <Range min="1" max="100" 
                                     onChange={this.handleMarginSizeChange}
                                     value={this.props.logo.margin} />
                             </div>
