@@ -94,8 +94,12 @@ class TextEditSidebar extends Component {
     render() {
         let undoDisabled = !this.props.canUndo();
         let undoClass = "waves-effect waves-light btn-small";
+        let redoDisabled = !this.props.canRedo();
+        let redoClass = "waves-effect waves-light btn-small";
         if (undoDisabled)
             undoClass += " disabled";
+        if (redoDisabled)
+            redoClass += " disabled";
         return (
             <div className="card-panel col s4">
                 <div className="card blue-grey darken-1">
@@ -125,7 +129,7 @@ class TextEditSidebar extends Component {
                         <TextInput onChange={(event)=>this.setState({ inputFieldText: event.target.value })}/>
                         </Modal>
                         <button className={undoClass} onClick={this.handleUndo}>Undo</button>
-                        <button className={undoClass} onClick={this.handleRedo}>Redo</button>
+                        <button className={redoClass} onClick={this.handleRedo}>Redo</button>
                     </div>
                 </div>
                 <div className="card blue-grey darken-1">

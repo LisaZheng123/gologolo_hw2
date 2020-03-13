@@ -22,7 +22,6 @@ export class EditScreen extends Component {
     }
 
     checkKeyDown = (event) => {
-        
         if (event.key === 'z' && event.ctrlKey){
             console.log("Ctrl-Z Pressed");
             this.props.undoCallback();
@@ -52,6 +51,7 @@ export class EditScreen extends Component {
                         changeLogoCallback={this.props.changeLogoCallback}
                         undoCallback={this.props.undoCallback}                                          
                         canUndo={this.props.canUndo}  
+                        canRedo={this.props.canRedo}  
                         redoCallback={this.props.redoCallback}                       
                     />
                     <TextEditWorkspace
