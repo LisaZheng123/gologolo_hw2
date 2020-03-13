@@ -102,8 +102,10 @@ class TextEditSidebar extends Component {
         let undoClass = "waves-effect waves-light btn-small";
         let redoDisabled = !this.props.canRedo();
         let redoClass = "waves-effect waves-light btn-small";
+       
         let isEmptyText = /^\s*$/.test(this.state.text);
         let saveButtonStyle = isEmptyText ? " disabled " : "";
+
         if (undoDisabled)
             undoClass += " disabled";
         if (redoDisabled)
@@ -144,7 +146,7 @@ class TextEditSidebar extends Component {
                 </div>
                 <div className="card blue-grey darken-1">
                     <div className="card-content white-text">
-                        <span className="card-title">Text</span>
+                        <span className="card-title">Styling</span>
                         <div className="row">
                             <div className="col s4">Color:</div>
                             <div className="col s8">
