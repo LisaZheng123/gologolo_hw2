@@ -11,7 +11,6 @@ class TextEditSidebar extends Component {
         this.state = {
             textColor : this.props.logo.textColor,
             fontSize : this.props.logo.fontSize,
-            inputFieldText : "",
             text: this.props.logo.text,
             backgroundColor: this.props.logo.backgroundColor,
             borderColor: this.props.logo.borderColor,
@@ -19,6 +18,23 @@ class TextEditSidebar extends Component {
             margin: this.props.logo.margin,
             borderRadius: this.props.borderRadius,
             borderThickness: this.props.borderThickness        
+        }
+    }
+
+    componentDidUpdate(prev) {
+        if (this.props.logo !== prev.logo) {
+            this.setState({
+                textColor : this.props.logo.textColor,
+                fontSize : this.props.logo.fontSize,
+                inputFieldText : "",
+                text: this.props.logo.text,
+                backgroundColor: this.props.logo.backgroundColor,
+                borderColor: this.props.logo.borderColor,
+                padding: this.props.logo.padding,
+                margin: this.props.logo.margin,
+                borderRadius: this.props.borderRadius,
+                borderThickness: this.props.borderThickness        
+            });
         }
     }
 
@@ -81,21 +97,13 @@ class TextEditSidebar extends Component {
         this.props.redoCallback();
     }
 
-    handleInputFieldText = () => {
-        var input = this.state.inputFieldText;
-        console.log("handleInputFieldText to " + this.state.inputFieldText);
-        if (input.trim() == "") {
-            alert("Invalid!");
-        } else {
-            this.setState({ text: input}, this.completeUserEditing)
-        }
-    }
-
     render() {
         let undoDisabled = !this.props.canUndo();
         let undoClass = "waves-effect waves-light btn-small";
         let redoDisabled = !this.props.canRedo();
         let redoClass = "waves-effect waves-light btn-small";
+        let isEmptyText = /^\s*$/.test(this.state.text);
+        let saveButtonStyle = isEmptyText ? " disabled " : "";
         if (undoDisabled)
             undoClass += " disabled";
         if (redoDisabled)
@@ -105,11 +113,12 @@ class TextEditSidebar extends Component {
                 <div className="card blue-grey darken-1">
                     <div className="card-content white-text">
                     <Modal actions={[
-                            <Button flat modal="close" node="button" waves="green" onClick={this.handleInputFieldText}>Save</Button>
+                            <Button className={saveButtonStyle} flat modal="close" node="button" waves="green" onClick={this.completeUserEditing}>Save</Button>,
+                            <Button flat modal="close" node="button" waves="green">Cancel</Button>
                         ]}
                         bottomSheet={false}
                         fixedFooter={false}
-                        header="Modal Header"
+                        header="Logo Name: "
                         id="modal-0"
                         options={{
                             dismissible: true,
@@ -126,7 +135,8 @@ class TextEditSidebar extends Component {
                         }}
                         trigger={<Button node="button">&#9998;</Button>}
                     >
-                        <TextInput onChange={(event)=>this.setState({ inputFieldText: event.target.value })}/>
+                        <TextInput value={this.state.text} onChange={(event)=>this.setState({ text: event.target.value })}/>
+                        {isEmptyText ? <span className="red-text">Invalid!</span> : null }
                         </Modal>
                         <button className={undoClass} onClick={this.handleUndo}>Undo</button>
                         <button className={redoClass} onClick={this.handleRedo}>Redo</button>

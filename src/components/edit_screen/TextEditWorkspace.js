@@ -19,9 +19,10 @@ class TextEditWorkspace extends Component {
             }
         }
         return (
-            <div className="col s8"
-                style={ styles.container }>
-                {this.props.logo.text}
+            <div className="col s8">
+                <div style={ styles.container }>
+                   {this.props.logo.text}
+                </div>
             </div>
         )
     }
